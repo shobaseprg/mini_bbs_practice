@@ -1,10 +1,22 @@
 <?php
-if ($_POST['name'] === "") {
-	$error['name'] = 'blank';
-}
-if ($_POST['password'] === "") {
-	$error['password'] = 'blank';
-}
+session_start();
+
+if (!empty($_POST)) {
+	if ($_POST['name'] === "") {
+		$error['name'] = 'blank';
+	}
+	if ($_POST['password'] === "") {
+		$error['password'] = 'blank';
+	}
+
+	if (empty($error)) {
+		$_SESSION['join'] = $_POST;
+		header('Location: check.php');
+	}
+};
+  if ($_REQUEST['action']=='rewrite') {
+		$_POST = $_SESSION['join'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -17,12 +29,12 @@ if ($_POST['password'] === "") {
 	<link rel="stylesheet" href="../style.css" />
   <body>
 		<form action="", method="post", nctype="multipart/form-data">
-			<input type='text', name="name", value=""><br>
+			<input type='text', name="name", value="<?php echo $_POST['name'] ?>"><br>
 				<?php if ($error['name'] === 'blank') {
 					echo '名前いれろ<br>';
 				}
 				?>
-			<input type='password', name='password', value=""><br>
+			<input type='password', name='password', value="<?php echo $_POST['password'] ?>"><br>
 			<?php if ($error['password'] === 'blank') : ?>
         パスいれろ<br>
 			<?php endif ?>
@@ -30,4 +42,5 @@ if ($_POST['password'] === "") {
 		</form>
 
   </body>
+<?php var_dump($error); ?>
 </html>
