@@ -1,0 +1,5 @@
+# gitから対象外とするフォルダ
+
+member_picture/
+watch_log.log
+

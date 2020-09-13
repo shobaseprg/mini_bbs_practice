@@ -1,4 +1,6 @@
 <?php
+ini_set("log_errors", "on");
+ini_set("error_log", "/Applications/MAMP/htdocs/mini_bbs_practice/join/watch_log.log");
 session_start();
 ?>
 
@@ -15,14 +17,22 @@ session_start();
 <?php
 echo "name:".$_SESSION['join']['name']."<br>";
 echo "password:".$_SESSION['join']['password']."<br>";
-echo "<a href='index.php?action=rewrite'>戻る</a>";
 ?>
 
+<?php if ($_SESSION['on_picture'] === 'yes') : ?>
+	<img src="../member_picture/<?php print($_SESSION['join']['image']); ?>" width="100" height="100" alt="">
+<?php endif; ?>
+echo "<a href='index.php?action=rewrite'>戻る</a>";
+
+
   </body>
-  --------debug---------<br>
-  <?php
-  var_dump($_SESSION['join']);
-  echo var_dump($_POST);
-  ?>
-  </pre>
 </html>
+<pre>
+<?php
+echo "<br>============debug=================<br>";
+echo "<br>---------------【SESSION】--------------------<br>";
+print_r($_SESSION);
+// session_destroy();
+// $_SESSION = array();
+?>
+</pre>
